@@ -9,7 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class AnvilCmd implements CommandExecutor {
     private final Anvil plugin;
@@ -39,7 +38,7 @@ public class AnvilCmd implements CommandExecutor {
                 return true;
             }
 
-            if (plugin.getConfigData().isPlaySound()) {
+            if (plugin.getConfigData().isPlaySound() && plugin.getConfigData().getSound() != null) {
                 player.playSound(player.getLocation(), plugin.getConfigData().getSound(), 0.5F, 0.5F);
             }
 

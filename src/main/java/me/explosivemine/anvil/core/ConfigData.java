@@ -33,7 +33,7 @@ public class ConfigData {
     }
 
     public Sound getSound() {
-        return XSound.matchXSound(sound).get().parseSound();
+        return XSound.matchXSound(sound).map(XSound :: parseSound).orElse(null);
     }
 
     public String getOnConsoleExecuteCommand() {
@@ -103,8 +103,7 @@ public class ConfigData {
 
     private void appendConfig(String... lines) {
         File dataDir = plugin.getDataFolder();
-        if (!dataDir.exists())
-            dataDir.mkdirs();
+        if (!dataDir.exists()) dataDir.mkdirs();
 
         File file = new File(dataDir, "config.yml");
 
