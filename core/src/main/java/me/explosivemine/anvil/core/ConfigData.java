@@ -16,7 +16,6 @@ public class ConfigData {
     // lang
     private String onConsoleExecuteCommand;
     private String noPermission;
-    private String text;
     private String title;
 
     //sound
@@ -41,11 +40,6 @@ public class ConfigData {
     public String getNoPermission() {
         if (noPermission.equalsIgnoreCase("none")) return null;
         return Util.chat(noPermission);
-    }
-
-    public String getText() {
-        if (text.equalsIgnoreCase("none")) return null;
-        return Util.chat(text);
     }
 
     public String getTitle() {
@@ -86,13 +80,6 @@ public class ConfigData {
                     "noPermission: \"Unknown command. Type \\\"help\\\" for help.\"");
         }
 
-        if (!config.isSet("text")) {
-            appendConfig("#This is the text the anvil gui starts with.",
-                    "#Color codes and unicode characters work, but might glitch.",
-                    "#Set the message to \"none\" to disable.",
-                    "text: \" \"");
-        }
-
         if (!config.isSet("title")) {
             appendConfig("#This sets the title of the GUI (only works in 1.14+)",
                     "#Color codes and unicode characters work, but might glitch.",
@@ -130,7 +117,6 @@ public class ConfigData {
 
             onConsoleExecuteCommand = config.getString("onConsoleExecuteCommand", "This command cannot be executed from the console!");
             noPermission = config.getString("noPermission", "Unknown command. Type \"help\" for help.");
-            text = config.getString("text", " ");
             title = config.getString("title", "&6Repair & Name");
 
             playSound = config.getBoolean("playSound", true);
