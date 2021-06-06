@@ -19,6 +19,12 @@ public class AnvilCmd implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         // /anvil reload
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+            if (!sender.hasPermission("anvil.admin")) {
+                String msg = plugin.getConfigData().getNoPermission();
+                if (msg != null) sender.sendMessage(msg);
+                return true;
+            }
+
             sender.sendMessage("Reloading config...");
             plugin.getConfigData().load();
         } else {

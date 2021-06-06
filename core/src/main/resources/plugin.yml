@@ -10,5 +10,4 @@ website: https://www.spigotmc.org/resources/anvilgui.77142/
 commands:
   anvil:
     description: "Opens the anvil gui anywhere!"
-    permission: anvil.open
     usage: "Usage: /<command> [reload]"
