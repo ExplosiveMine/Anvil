@@ -1080,17 +1080,6 @@ public enum XSound {
         }
     }
 
-    /**
-     * Attempts to build the string like an enum name.<br>
-     * Removes all the spaces, numbers and extra non-English characters. Also removes some config/in-game based strings.
-     * While this method is hard to maintain, it's extremely efficient. It's approximately more than x5 times faster than
-     * the normal RegEx + String Methods approach for both formatted and unformatted material names.
-     *
-     * @param name the sound name to format.
-     *
-     * @return an enum name.
-     * @since 1.0.0
-     */
     @Nonnull
     private static String format(@Nonnull String name) {
         int len = name.length();
@@ -1120,113 +1109,24 @@ public enum XSound {
         return new String(chs, 0, count);
     }
 
-    /**
-     * Parses the XSound with the given name.
-     *
-     * @param sound the name of the sound.
-     *
-     * @return a matched XSound.
-     * @since 1.0.0
-     */
     @Nonnull
     public static Optional<XSound> matchXSound(@Nonnull String sound) {
         Validate.notEmpty(sound, "Cannot match XSound of a null or empty sound name");
         return Optional.ofNullable(Data.NAMES.get(format(sound)));
     }
 
-    @Nullable
-    public static CompletableFuture<Record> parse(@Nullable Player player, @Nonnull Location location, @Nullable String sound, boolean play) {
-        Objects.requireNonNull(location, "Cannot play sound to null location");
-        if (Strings.isNullOrEmpty(sound) || sound.equalsIgnoreCase("none")) return null;
-
-        return CompletableFuture.supplyAsync(() -> {
-            String[] split = StringUtils.split(StringUtils.deleteWhitespace(sound), ',');
-
-            String name = split[0];
-            boolean playAtLocation = player == null;
-            if (!playAtLocation && name.charAt(0) == '~') {
-                name = name.substring(1);
-                playAtLocation = true;
-            }
-            Optional<XSound> typeOpt = matchXSound(name);
-            if (!typeOpt.isPresent()) return null;
-            Sound type = typeOpt.get().parseSound();
-            if (type == null) return null;
-
-            float volume = DEFAULT_VOLUME;
-            float pitch = DEFAULT_PITCH;
-
-            try {
-                if (split.length > 1) {
-                    volume = Float.parseFloat(split[1]);
-                    if (split.length > 2) pitch = Float.parseFloat(split[2]);
-                }
-            } catch (NumberFormatException ignored) {
-            }
-
-            Record record = new Record(type, player, location, volume, pitch, playAtLocation);
-            if (play) record.play();
-            return record;
-        }).exceptionally((ex) -> {
-            System.err.println("Could not play sound for string: " + sound);
-            ex.printStackTrace();
-            return null;
-        });
-    }
-
-    /**
-     * In most cases your should be using {@link #name()} instead.
-     *
-     * @return a friendly readable string name.
-     */
     @Override
     public String toString() {
         return WordUtils.capitalize(this.name().replace('_', ' ').toLowerCase(Locale.ENGLISH));
     }
 
-    /**
-     * Parses the XSound as a {@link Sound} based on the server version.
-     *
-     * @return the vanilla sound.
-     * @since 1.0.0
-     */
     @Nullable
     public Sound parseSound() {
         return this.sound;
     }
 
-    /**
-     * Plays a sound in a location with the given volume and pitch.
-     *
-     * @param location the location to play this sound.
-     * @param volume   the volume of the sound, 1 is normal.
-     * @param pitch    the pitch of the sound, 0 is normal.
-     *
-     * @since 2.0.0
-     */
-    public void play(@Nonnull Location location, float volume, float pitch) {
-        Objects.requireNonNull(location, "Cannot play sound to null location");
-        Sound sound = this.parseSound();
-        if (sound != null) location.getWorld().playSound(location, sound, volume, pitch);
-    }
-
-    /**
-     * Used for datas that need to be accessed during enum initilization.
-     *
-     * @since 5.0.0
-     */
     private static final class Data {
-        /**
-         * Just for enum initialization.
-         *
-         * @since 5.0.0
-         */
         private static final WeakHashMap<String, Sound> BUKKIT_NAMES = new WeakHashMap<>();
-        /**
-         * We don't want to use {@link Enums#getIfPresent(Class, String)} to avoid a few checks.
-         *
-         * @since 3.1.0
-         */
         private static final Map<String, XSound> NAMES = new HashMap<>();
 
         static {
@@ -1234,11 +1134,6 @@ public enum XSound {
         }
     }
 
-    /**
-     * A class to help caching sound properties parsed from config.
-     *
-     * @since 3.0.0
-     */
     public static class Record {
         public final Sound sound;
         public final Player player;
@@ -1256,22 +1151,10 @@ public enum XSound {
             this.playAtLocation = playAtLocation;
         }
 
-        /**
-         * Plays the sound with the given options and updating the players location.
-         *
-         * @since 3.0.0
-         */
         public void play() {
             play(player == null ? location : player.getLocation());
         }
 
-        /**
-         * Plays the sound with the updated location.
-         *
-         * @param updatedLocation the upated location.
-         *
-         * @since 3.0.0
-         */
         public void play(@Nonnull Location updatedLocation) {
             if (playAtLocation) location.getWorld().playSound(updatedLocation, sound, volume, pitch);
             else if (player.isOnline()) player.playSound(updatedLocation, sound, volume, pitch);
