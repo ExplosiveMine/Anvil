@@ -1,6 +1,9 @@
 # Anvil
 Open the anvil gui anywhere!
 
+## Versions
+1.8-1.16
+
 ## Commands and Permissions
 - /anvil - (Permission: `anvil.open`) Opens the anvil gui from anywhere!
 - /anvil reload - (Permission: `anvil.admin`) Reloads the config files
