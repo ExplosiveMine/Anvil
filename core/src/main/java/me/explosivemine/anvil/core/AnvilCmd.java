@@ -28,6 +28,7 @@ public class AnvilCmd implements CommandExecutor {
             sender.sendMessage("Reloading config...");
             plugin.getConfigData().load();
         } else {
+            // /anvil
             if (!(sender instanceof Player)) {
                 String msg = plugin.getConfigData().getOnConsoleExecuteCommand();
                 if (msg == null) return true;

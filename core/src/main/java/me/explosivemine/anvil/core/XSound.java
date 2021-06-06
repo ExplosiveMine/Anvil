@@ -1133,31 +1133,4 @@ public enum XSound {
             for (Sound sound : Sound.values()) BUKKIT_NAMES.put(sound.name(), sound);
         }
     }
-
-    public static class Record {
-        public final Sound sound;
-        public final Player player;
-        public final Location location;
-        public final float volume;
-        public final float pitch;
-        public final boolean playAtLocation;
-
-        public Record(@Nonnull Sound sound, @Nullable Player player, @Nonnull Location location, float volume, float pitch, boolean playAtLocation) {
-            this.sound = sound;
-            this.player = player;
-            this.location = location;
-            this.volume = volume;
-            this.pitch = pitch;
-            this.playAtLocation = playAtLocation;
-        }
-
-        public void play() {
-            play(player == null ? location : player.getLocation());
-        }
-
-        public void play(@Nonnull Location updatedLocation) {
-            if (playAtLocation) location.getWorld().playSound(updatedLocation, sound, volume, pitch);
-            else if (player.isOnline()) player.playSound(updatedLocation, sound, volume, pitch);
-        }
-    }
 }
