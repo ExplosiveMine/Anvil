@@ -71,9 +71,6 @@ public class Wrapper1_12_R1 implements VersionWrapper {
         }
 
         @Override
-        public void b(EntityHuman entityhuman) { }
-
-        @Override
         protected void a(EntityHuman entityhuman, World world, IInventory iinventory) { }
     }
 }
