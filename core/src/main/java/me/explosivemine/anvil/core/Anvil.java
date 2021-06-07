@@ -18,5 +18,11 @@ public final class Anvil extends JavaPlugin {
         if (!configData.cont) return;
 
         new AnvilCmd();
+        setupMetrics();
+    }
+
+    private void setupMetrics() {
+        final int pluginID = 11598;
+        Metrics metrics = new Metrics(this, pluginID);
     }
 }
