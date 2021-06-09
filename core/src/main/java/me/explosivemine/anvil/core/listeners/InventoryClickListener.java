@@ -41,7 +41,6 @@ public class InventoryClickListener implements Listener {
 
             ItemStack item = event.getCurrentItem();
             ItemMeta meta = item.getItemMeta();
-            System.out.println(meta.getDisplayName());
             meta.setDisplayName(Util.chat(meta.getDisplayName()));
             item.setItemMeta(meta);
         }
