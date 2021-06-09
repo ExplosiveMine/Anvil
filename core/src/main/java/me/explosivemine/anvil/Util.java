@@ -1,4 +1,4 @@
-package me.explosivemine.anvil.core;
+package me.explosivemine.anvil;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

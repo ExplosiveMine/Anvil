@@ -1,5 +1,6 @@
 package me.explosivemine.anvil.core;
 
+import me.explosivemine.anvil.Anvil;
 import me.explosivemine.anvil.AnvilGUI;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

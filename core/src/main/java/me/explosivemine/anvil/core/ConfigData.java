@@ -1,6 +1,9 @@
 package me.explosivemine.anvil.core;
 
 import lombok.Getter;
+import me.explosivemine.anvil.Anvil;
+import me.explosivemine.anvil.Util;
+import me.explosivemine.anvil.XSound;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -22,6 +25,9 @@ public class ConfigData {
     @Getter
     private boolean playSound;
     private String sound;
+
+    @Getter
+    private boolean unbreakableAnvils, anvilColours;
 
     public ConfigData() {
         plugin = Anvil.getINSTANCE();
@@ -85,6 +91,27 @@ public class ConfigData {
                     "#Color codes and unicode characters work, but might glitch.",
                     "title: \"&6Repair & Name\"");
         }
+
+        if (!config.isSet("unbreakableAnvils")) {
+            appendConfig("#This makes it so that anvils never break or get damaged upon use. Players",
+                    "#will still be able to break them normally. When anvils fall, they will still get damaged.",
+                    "#Possible values: [true, false],",
+                    "# true - anvils will not break when used by players",
+                    "# false - default anvil mechanics apply",
+                    "# If set to true, only players with the permission \"anvil.unbreakable\" will enjoy",
+                    "# having anvils that do not break. For others default, anvil mechanics apply.",
+                    "unbreakableAnvils: true");
+        }
+
+        if (!config.isSet("anvilColours")) {
+            appendConfig("#This allows items to be renamed using colour codes in anvils",
+                    "#Possible values: [true, false],",
+                    "# true - colour codes will work",
+                    "# false - colour codes won't work",
+                    "# If set to true, only players with the permission \"anvil.colour\" will enjoy",
+                    "# anvil colours. For others default, the colour code simply will not work.",
+                    "anvilColours: true");
+        }
     }
 
     private void appendConfig(String... lines) {
@@ -122,10 +149,13 @@ public class ConfigData {
             playSound = config.getBoolean("playSound", true);
             sound = config.getString("soundName", "ENTITY_ENDERMAN_TELEPORT");
 
+            unbreakableAnvils = config.getBoolean("unbreakableAnvils", true);
+            anvilColours = config.getBoolean("anvilColours", true);
+
             Util.info("Config successfully loaded.");
         } catch (Exception e) {
             Util.severe("The config could not be loaded");
-            Util.severe("Please ensure that it is configured properly.");
+            Util.severe("Please ensure that it is properly configured .");
             cont = false;
             Bukkit.getServer().getPluginManager().disablePlugin(plugin);
         }
