@@ -1,13 +1,10 @@
-# Anvil
+# Anvil (1.8-1.16)
 ![#3 Januar Download (1)](https://user-images.githubusercontent.com/63336853/120971786-1a8a2580-c77e-11eb-8d3f-b71c063cfd08.jpg)
 
 ## Features
 - Open the anvil gui from anywhere - /anvil 
 - Make anvils unbreakable for certain players or all of them
 - Allow certain players to rename items with colour codes
-
-## Versions
-1.8-1.16
 
 ## Commands and Permissions
 - /anvil - (Permission: `anvil.open`) Opens the anvil gui from anywhere!
