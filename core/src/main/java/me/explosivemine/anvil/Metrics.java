@@ -1,4 +1,4 @@
-package me.explosivemine.anvil.core;
+package me.explosivemine.anvil;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
