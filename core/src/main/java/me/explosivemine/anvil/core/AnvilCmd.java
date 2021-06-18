@@ -12,8 +12,8 @@ import org.bukkit.inventory.ItemStack;
 public class AnvilCmd implements CommandExecutor {
     private final Anvil plugin;
 
-    public AnvilCmd() {
-        this.plugin = Anvil.getINSTANCE();
+    public AnvilCmd(final Anvil plugin) {
+        this.plugin = plugin;
         plugin.getCommand("anvil").setExecutor(this);
     }
 

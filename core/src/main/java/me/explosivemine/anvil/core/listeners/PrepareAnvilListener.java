@@ -12,8 +12,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class PrepareAnvilListener implements Listener {
     private final Anvil plugin;
 
-    public PrepareAnvilListener() {
-        this.plugin = Anvil.getINSTANCE();
+    public PrepareAnvilListener(final Anvil plugin) {
+        this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

@@ -13,8 +13,8 @@ import org.bukkit.inventory.ItemStack;
 public class PlayerInteractListener implements Listener {
     private final Anvil plugin;
 
-    public PlayerInteractListener() {
-        this.plugin = Anvil.getINSTANCE();
+    public PlayerInteractListener(final Anvil plugin) {
+        this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 

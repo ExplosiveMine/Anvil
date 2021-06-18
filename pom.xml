@@ -27,6 +27,7 @@
         <module>1_16_R1</module>
         <module>1_16_R2</module>
         <module>1_16_R3</module>
+        <module>1_17_R1</module>
         <module>core</module>
     </modules>
     <packaging>pom</packaging>
@@ -78,16 +79,12 @@
 
     <repositories>
         <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+            <id>nms-repo</id>
+            <url>https://repo.codemc.org/repository/nms/</url>
         </repository>
         <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>nms-repo</id>
-            <url>https://repo.codemc.org/repository/nms/</url>
         </repository>
     </repositories>
 

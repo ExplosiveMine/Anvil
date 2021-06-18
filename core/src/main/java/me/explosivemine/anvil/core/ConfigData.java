@@ -29,8 +29,8 @@ public class ConfigData {
     @Getter
     private boolean unbreakableAnvils, anvilColours;
 
-    public ConfigData() {
-        plugin = Anvil.getINSTANCE();
+    public ConfigData(final Anvil plugin) {
+        this.plugin = plugin;
         load();
     }
 
@@ -139,6 +139,7 @@ public class ConfigData {
 
         checkConfigForMissingOptions();
 
+        // config.yml
         try {
             FileConfiguration config = plugin.getConfig();
 
@@ -154,7 +155,7 @@ public class ConfigData {
 
             Util.info("Config successfully loaded.");
         } catch (Exception e) {
-            Util.severe("The config could not be loaded");
+            Util.severe("The config.yml could not be loaded");
             Util.severe("Please ensure that it is properly configured .");
             cont = false;
             Bukkit.getServer().getPluginManager().disablePlugin(plugin);

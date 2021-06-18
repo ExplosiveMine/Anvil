@@ -17,10 +17,10 @@ public class InventoryClickListener implements Listener {
     private final Anvil plugin;
     private final boolean handleAnvilColours;
 
-    public InventoryClickListener(boolean handleAnvilColours) {
-        this.plugin = Anvil.getINSTANCE();
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    public InventoryClickListener(boolean handleAnvilColours, final Anvil plugin) {
+        this.plugin = plugin;
         this.handleAnvilColours = handleAnvilColours;
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
@@ -31,7 +31,9 @@ public class InventoryClickListener implements Listener {
         HumanEntity entity = event.getWhoClicked();
         if (!(entity instanceof Player)) return;
         final Player player = (Player) entity;
+
         if (!(event.getInventory() instanceof AnvilInventory)) return;
+
         final int rawSlot = event.getRawSlot();
         if (rawSlot == event.getView().convertSlot(rawSlot) && rawSlot == 2) {
             player.playSound(player.getLocation(), XSound.BLOCK_ANVIL_USE.parseSound(), 0.5f, 0.5f);

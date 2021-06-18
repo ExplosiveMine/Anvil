@@ -10,20 +10,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Anvil extends JavaPlugin {
-    @Getter
     public static Anvil INSTANCE;
+    private static String SERVER_VERSION;
     @Getter
     private ConfigData configData;
-
-    private String SERVER_VERSION;
-
 
     @Override
     public void onEnable() {
         INSTANCE = this;
         SERVER_VERSION = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3].substring(1);
 
-        configData = new ConfigData();
+        configData = new ConfigData(INSTANCE);
         if (!configData.cont) return;
 
         registerCommandsAndListeners();
@@ -32,21 +29,21 @@ public final class Anvil extends JavaPlugin {
 
     private void setupMetrics() {
         final int pluginID = 11598;
-        new Metrics(this, pluginID);
+        new Metrics(INSTANCE, pluginID);
     }
 
     private void registerCommandsAndListeners() {
         //Commands
-        new AnvilCmd();
+        new AnvilCmd(INSTANCE);
 
         //Listeners
-        if (configData.isUnbreakableAnvils()) new PlayerInteractListener();
+        if (configData.isUnbreakableAnvils()) new PlayerInteractListener(INSTANCE);
 
         if (SERVER_VERSION.compareTo("1_10_R1") < 0) {
-            if (configData.isAnvilColours()) new PrepareAnvilListener();
-            new InventoryClickListener(false);
+            if (configData.isAnvilColours()) new PrepareAnvilListener(INSTANCE);
+            new InventoryClickListener(false, INSTANCE);
         } else {
-            new InventoryClickListener(configData.isAnvilColours());
+            new InventoryClickListener(configData.isAnvilColours(), INSTANCE);
         }
     }
 }
