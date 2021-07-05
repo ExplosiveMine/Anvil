@@ -33,5 +33,7 @@ public class PlayerInteractListener implements Listener {
                 .itemRight(new ItemStack(Material.AIR))
                 .title(plugin.getConfigData().getTitle())
                 .open(event.getPlayer());
+
+        plugin.getOpenPlayers().add(player.getUniqueId());
     }
 }

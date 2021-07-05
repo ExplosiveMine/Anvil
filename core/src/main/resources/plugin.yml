@@ -1,5 +1,5 @@
 name: Anvil
-version: 1.2.1
+version: 1.2.2
 main: me.explosivemine.anvil.Anvil
 prefix: Anvil
 api-version: 1.13

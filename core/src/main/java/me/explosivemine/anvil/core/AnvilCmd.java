@@ -53,6 +53,8 @@ public class AnvilCmd implements CommandExecutor {
                     .itemRight(new ItemStack(Material.AIR))
                     .title(plugin.getConfigData().getTitle())
                     .open(player);
+
+            plugin.getOpenPlayers().add(player.getUniqueId());
         }
         return true;
     }

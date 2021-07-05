@@ -71,5 +71,11 @@ public class Wrapper1_8_R1 implements VersionWrapper {
         public boolean a(EntityHuman human) {
             return true;
         }
+
+        @Override
+        public void b(EntityHuman entityhuman) {
+        }
+
     }
+
 }

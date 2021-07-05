@@ -71,6 +71,13 @@ public class Wrapper1_12_R1 implements VersionWrapper {
         }
 
         @Override
-        protected void a(EntityHuman entityhuman, World world, IInventory iinventory) { }
+        protected void a(EntityHuman entityhuman, World world, IInventory iinventory) {
+        }
+
+        @Override
+        public void b(EntityHuman entityhuman) {
+        }
+
     }
+
 }

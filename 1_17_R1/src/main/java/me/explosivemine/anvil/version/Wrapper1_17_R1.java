@@ -84,10 +84,17 @@ public class Wrapper1_17_R1 implements VersionWrapper {
         }
 
         @Override
-        protected void a(EntityHuman entityhuman, IInventory iinventory) { }
+        protected void a(EntityHuman entityhuman, IInventory iinventory) {
+        }
+
+        @Override
+        public void b(EntityHuman entityhuman) {
+        }
 
         public int getContainerId() {
             return this.j;
         }
+
     }
+
 }
