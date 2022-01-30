@@ -3,6 +3,7 @@ package me.explosivemine.anvil.version;
 import me.explosivemine.anvil.version.abstraction.VersionWrapper;
 import org.bukkit.Bukkit;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,15 +16,15 @@ public class VersionMatcher {
             Wrapper1_11_R1.class, Wrapper1_12_R1.class, Wrapper1_13_R1.class,
             Wrapper1_13_R2.class, Wrapper1_14_R1.class, Wrapper1_15_R1.class,
             Wrapper1_16_R1.class, Wrapper1_16_R2.class, Wrapper1_16_R3.class,
-            Wrapper1_17_R1.class
+            Wrapper1_17_R1.class, Wrapper1_18_R1.class
         );
 
     public VersionWrapper match() {
         try {
             return versions.stream().filter(version -> version.getSimpleName().substring(7).equals(serverVersion))
                     .findFirst().orElseThrow(() -> new RuntimeException("Your server version is not supported by this plugin!"))
-                    .newInstance();
-        } catch (IllegalAccessException | InstantiationException ex) {
+                    .getDeclaredConstructor().newInstance();
+        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException ex) {
             throw new RuntimeException(ex);
         }
     }
